@@ -3,7 +3,7 @@ Type: Package
 Title: Explorative Tools for Time Series
 Version: 0.1.0
 Author: Jacques Marc-Antoine
-Maintainer: Jacques Marc-Antoine <marc-antoine.jacques@students.unibe.ch>
+Maintainer: Jacques Marc-Antoine <marc-antoine.jacques@izb.unibe.ch>
 Description: 
     Individual TS: single and multi peak feature.
     Ensemble of TS: synchrony, noise.
