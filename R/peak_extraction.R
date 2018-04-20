@@ -42,6 +42,8 @@
 #' @param ext.winlen Window length for looking for local extrema. For "extrema"
 #'   method.
 #' @param ext.what One of "mini" or "maxi". For "extrema" method.
+#' @param show.warning Logical, disable warning for the current execution. Useful when providing
+#' all.winlen and applying the function multiple times.
 #'
 #' @details Zscore method is based on
 #'   https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data#22640362.
@@ -79,7 +81,8 @@ extract_peak <-
            wt.snr = 1,
            wt.centile_noise = 10,
            ext.winlen = NULL,
-           ext.what = "maxi") {
+           ext.what = "maxi",
+           show.warning = TRUE) {
     require(data.table)
     require(peakPick)
     require(reticulate)
@@ -97,7 +100,7 @@ extract_peak <-
       sp.winlen <- all.winlen
       bp.winlen <- all.winlen
       ext.winlen <- all.winlen
-      warning("When all.winlen is provided, it overwrites all other xxx.winlen arguments.")
+      if(show.warning) warning("When all.winlen is provided, it overwrites all other xxx.winlen arguments.")
     }
     if ("spike" %in% method & is.null(sp.roi)) {
       # Look for spikes everywhere in the signal
