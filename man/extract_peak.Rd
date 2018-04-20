@@ -9,55 +9,90 @@ extract_peak(y, method = c("spike", "bump"), all.winlen = NULL,
   sp.winlen = NULL, sp.nsd = 3, sp.roi = NULL, bp.winlen = NULL,
   bp.mind = NULL, bp.maxderiv = 0.04, bp.nsd = 0.5, bp.npos = 10L,
   wt.widths = NULL, wt.snr = 1, wt.centile_noise = 10,
-  ext.winlen = NULL, ext.what = "maxi")
+  ext.winlen = NULL, ext.what = "maxi", show.warning = TRUE)
 }
 \arguments{
 \item{y}{numeric vector. The series from which to extract peak positions.}
 
-\item{method}{Peak extraction method(s). One or several of ("zscore", "spike", "bump", "wavelet", "extrema").}
+\item{method}{Peak extraction method(s). One or several of ("zscore",
+"spike", "bump", "wavelet", "extrema").}
 
-\item{all.winlen}{numeric. Set a common window length for all methods relying on rolling mean. Will overwrite any xxx.winlen argument.}
+\item{all.winlen}{numeric. Set a common window length for all methods relying
+on rolling mean. Will overwrite any xxx.winlen argument.}
 
 \item{z.winlen}{numeric. Window length for rolling mean in "zscore" method.}
 
-\item{z.nsd}{numeric. Number of standard deviation away from rolling mean for "zscore" method.}
+\item{z.nsd}{numeric. Number of standard deviation away from rolling mean for
+"zscore" method.}
 
-\item{z.influence}{numeric. How much should peaks affect rolling mean? 0 means that they are not taken into account for computing rolling mean. 1 means that the rolling mean is computed without regards of points being peaks or not. Used in "zscore" method.}
+\item{z.influence}{numeric. How much should peaks affect rolling mean? 0
+means that they are not taken into account for computing rolling mean. 1
+means that the rolling mean is computed without regards of points being
+peaks or not. Used in "zscore" method.}
 
-\item{z.robust}{logical. If TRUE rolling median and MAD replace rolling mean and standard deviation. Used in "zscore" method.}
+\item{z.robust}{logical. If TRUE rolling median and MAD replace rolling mean
+and standard deviation. Used in "zscore" method.}
 
 \item{sp.winlen}{numeric. Window length for rolling mean in "spike" method.}
 
-\item{sp.nsd}{numeric. Number of standard deviation away from rolling mean for "spike" method.}
+\item{sp.nsd}{numeric. Number of standard deviation away from rolling mean
+for "spike" method.}
 
-\item{sp.roi}{numeric vector of length 2. Where to look for spikes in "spike" method.}
+\item{sp.roi}{numeric vector of length 2. Where to look for spikes in "spike"
+method.}
 
 \item{bp.winlen}{numeric. Window length for rolling mean in "bump" method.}
 
-\item{bp.mind}{numeric. Minimum distance between peaks for "bump" method. See ?peakpick::peakpick - neighlim.}
+\item{bp.mind}{numeric. Minimum distance between peaks for "bump" method. See
+?peakpick::peakpick - neighlim.}
 
-\item{bp.maxderiv}{numeric. Upper limit for the estimatied derivative for a point to be considered for a peak call. See ?peakpick::peakpick - deriv.lim.}
+\item{bp.maxderiv}{numeric. Upper limit for the estimatied derivative for a
+point to be considered for a peak call. See ?peakpick::peakpick -
+deriv.lim.}
 
-\item{bp.nsd}{numeric. Number of standard deviation away from rolling mean for "bump" method.}
+\item{bp.nsd}{numeric. Number of standard deviation away from rolling mean
+for "bump" method.}
 
-\item{bp.npos}{integer. Peak standard deviations and means will be estimated plus/minus npos positions from peak. See ?peakpick::peakpick - peak.npos.}
+\item{bp.npos}{integer. Peak standard deviations and means will be estimated
+plus/minus npos positions from peak. See ?peakpick::peakpick - peak.npos.}
 
-\item{wt.widths}{numeric vector. widths to use for calculating the CWT matrix. In general, this range should cover the expected width of peaks of interest. for "wavelet" method. See scipy.signal.find_peaks_cwt documentation.}
+\item{wt.widths}{numeric vector. widths to use for calculating the CWT
+matrix. In general, this range should cover the expected width of peaks of
+interest. for "wavelet" method. See scipy.signal.find_peaks_cwt
+documentation.}
 
-\item{wt.snr}{Minimum SNR ratio. See scipy.signal.find_peaks_cwt documentation.}
+\item{wt.snr}{Minimum SNR ratio. See scipy.signal.find_peaks_cwt
+documentation.}
 
-\item{wt.centile_noise}{When calculating the noise floor, percentile of data points examined below which to consider noise. See scipy.signal.find_peaks_cwt documentation.}
+\item{wt.centile_noise}{When calculating the noise floor, percentile of data
+points examined below which to consider noise. See
+scipy.signal.find_peaks_cwt documentation.}
 
-\item{ext.winlen}{Window length for looking for local extrema. For "extrema" method.}
+\item{ext.winlen}{Window length for looking for local extrema. For "extrema"
+method.}
 
 \item{ext.what}{One of "mini" or "maxi". For "extrema" method.}
+
+\item{show.warning}{Logical, disable warning for the current execution. Useful when providing
+all.winlen and applying the function multiple times.}
 }
 \value{
-A data table containing the signal along with results all of selected methods. Each method is stored
+A data table containing the signal along with results all of selected
+  methods. Each method result is stored in a different column.
 }
 \description{
 A wrapper for different peak extraction methods.
 }
 \details{
-Zscore method is based on https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data#22640362. Spike and Bump methods are wrapper for the function of the peakPick package: https://cran.r-project.org/web/packages/peakPick/peakPick.pdf. For the bump method, a rolling mean is first applied to the signal as recommended by the package authors. The wavelet method relies on scipy (python module) peak finder https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks_cwt.html.
+Zscore method is based on
+  https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data#22640362.
+
+
+  Spike and Bump methods are wrapper for the function of the peakPick
+  package: https://cran.r-project.org/web/packages/peakPick/peakPick.pdf. For
+  the bump method, a rolling mean is first applied to the signal as
+  recommended by the package authors.
+
+  The wavelet method relies on scipy (python module) peak finder
+  https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks_cwt.html.
 }
