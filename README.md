@@ -17,7 +17,7 @@ Note that some functions rely on Python, specifically numpy and scipy. Therefore
 
 ## Overview of the contents of the package
 
-### Peaks and oscillations analysis
+### Peaks analysis
 * Peak extraction: 
 
 Can be performed using `extract_peak()`. It is a wrapper for 5 different methods using rolling windows approaches and wavelet tranform.
@@ -31,6 +31,10 @@ Simple geometric features such as height, width, growth rate... can be extracted
 * Trends and season decomposition
 
 `classical.decomposition()` provides a decomposition between trends and season using an additive model: $y(t) = trend(t) + seasonal(t) + remainder(t)$. The decomposition can be performed robustly, such that the seasonal component is estimated by using the median (as opposed to the mean) of the detrended TS over seasons.
+
+* Multi-Peak/Oscillation features:
+
+Relying on this decomposition on the 3 component of this decomposition, `MPFeatAllFeat()` gives estimators for long-term trend (linear only), oscillation amplitude and variation in amplitude of oscillations. Individual features can be obtained through the call of the corresponding `MPFeat*()` function.
 
 * Synchrony of a pair of TS
 
