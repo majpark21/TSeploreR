@@ -206,3 +206,53 @@ circular.cc <- function(x, y){
   names(out) <- lags
   return(out)
 }
+
+
+#' Select Random
+#'
+#' Select a random subset of time series from a dataset by using unique ID
+#' subset. Optionally, a minimum number of observation for the individual IDs
+#' can be provided.
+#'
+#' @param in.file A character or a variable for the current environment. If a
+#'   character, a path to a .csv file is expected.
+#' @param ntraj Numeric. How many unique IDs to extract?
+#' @param col.uniqID Character. Name of the column with unique IDs.
+#' @param col.time Character. Name of the column with time.
+#' @param col.whatokeep Optional character. Name of the columns to be returned
+#'   in the output. If NULL returns all columns. Columns with uniqID and time
+#'   are always returned.
+#' @param out.file Optional character. If provided the output is saved as a .csv
+#'   file to the path indicated by out.file. Otherwise, the new dataset is
+#'   returned.
+#' @param min.obs Optional numeric. Minimum number of observations of an ID.
+#'
+#' @return A data.table with the columns indicated in col.whatokeep.
+#' @export
+#'
+#' @examples
+#' # Simulate 10 phase-shifted sinusoids with 3 different level of noises
+#' # ("experimental conditions", first grouping).
+#' x <- multi_sims(type = "ps", noises = c(0.2,0.4), n = 10)
+#' plot_sim(x)
+#' 
+#' # Read/export 5 random TS from/in environment
+#' x[, uniqID := paste(noise, variable, sep ="_")]
+#' x_subset <- select_random_subset(in.file=x, ntraj=5, col.uniqID="uniqID", col.time="Time")
+select_random_subset <- function(in.file, ntraj, col.uniqID, col.time, min.obs=NULL, col.whatokeep=NULL, out.file=NULL){
+  if(is.character(in.file)) dt <- fread(in.file)
+  else dt <- in.file
+  # Remove ID and time to avoid duplicate when whatokeep is null
+  if(is.null(col.whatokeep)) col.whatokeep <- setdiff(colnames(dt), c(col.uniqID, col.time))
+  # Choose IDs to keep, with=FALSE to use arguments provided as characters in data.table
+  if(!is.null(min.obs)){
+    candidates <- dt[, .N, by=get(col.uniqID)][N >= min.obs, get]
+    trajs <- sample(candidates, size=ntraj, replace=FALSE)
+  } else {
+    trajs <- sample(unlist(unique(dt[, col.uniqID, with=FALSE])), size=ntraj, replace=FALSE)
+  }
+  dt <- dt[get(col.uniqID) %in% trajs, c(col.uniqID, col.time, col.whatokeep), with=FALSE]
+  if(!is.null(out.file)) write.csv(dt, out.file, quote = FALSE, row.names = FALSE)
+  else return(dt)
+}
+
