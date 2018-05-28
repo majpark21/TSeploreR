@@ -4,7 +4,8 @@
 \alias{complete.time.series}
 \title{complete.time.series}
 \usage{
-complete.time.series(data, cond.col, lab.col, time.col, time.vector, meas.col)
+complete.time.series(data, cond.col, lab.col, time.col, time.vector, meas.col,
+  impute = FALSE)
 }
 \arguments{
 \item{data}{a data.table in long format with at least 4 columns:
@@ -23,12 +24,16 @@ grouping).}
 span? Missing times will be added to trajectory where it's not present.}
 
 \item{meas.col}{column name with measurements.}
+
+\item{impute}{logical. If TRUE, uses linear interpolation to replace NAs.
+Careful because this won't make the distinction between introduced NAs and
+the ones already present beforehand.}
 }
 \value{
 A data.table with extra rows for missing measurements.
 }
 \description{
-Add rows for missing measurements.
+Add rows for missing measurements in time series.
 }
 \examples{
 # Simulate 10 phase-shifted sinusoids with 3 different level of noises

@@ -104,7 +104,7 @@ detect.peak <- function(x, window.size, what = "maxi") {
 
 #' complete.time.series
 #'
-#' Add rows for missing measurements.
+#' Add rows for missing measurements in time series.
 #' @param data a data.table in long format with at least 4 columns:
 #' condition, label, time and measurement.
 #' @param cond.col column name for grouping. Typically an ID for experimental
@@ -116,6 +116,9 @@ detect.peak <- function(x, window.size, what = "maxi") {
 #' @param time.vector numerical vector. Over which time should ALL time series
 #'   span? Missing times will be added to trajectory where it's not present.
 #' @param meas.col column name with measurements.
+#' @param impute logical. If TRUE, uses linear interpolation to replace NAs.
+#' Careful because this won't make the distinction between introduced NAs and
+#' the ones already present beforehand.
 #'
 #' @return A data.table with extra rows for missing measurements.
 #' @export
@@ -136,11 +139,14 @@ detect.peak <- function(x, window.size, what = "maxi") {
 #'  time.col = "Time", time.vector = unique(x$Time),
 #'  meas.col = "value")
 #'
-complete.time.series <- function(data, cond.col, lab.col, time.col, time.vector, meas.col){
+complete.time.series <- function(data, cond.col, lab.col, time.col, time.vector, meas.col, impute = FALSE){
   require(data.table)
   temp <- CJ(unique(data[[cond.col]]), unique(data[[lab.col]]), time.vector)
   names(temp) <- c(cond.col, lab.col, time.col)
   out <- merge(temp, data, by = c(cond.col, lab.col, time.col), all.x = T)
+  if(impute){
+    out[, (meas.col) := na.interpolation(get(meas.col)), by = c(cond.col, lab.col)]
+  }
   return(out)
 }
 
