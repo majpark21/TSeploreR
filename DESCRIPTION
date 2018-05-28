@@ -8,7 +8,7 @@ Description:
     Individual TS: single and multi peak feature.
     Ensemble of TS: synchrony, noise.
     Ensembles of TS: separability.
-License: What license is it under?
+License: MIT | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: data.table,
