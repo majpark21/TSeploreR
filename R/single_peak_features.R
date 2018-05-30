@@ -148,7 +148,9 @@ FeatMaxAmplitude <- function(y, basal = min(y)){
 #' @return A list of 3: left and right represent the value of interpolated x at
 #'   which half of the maximum in y is reached. fwhm is the difference between
 #'   right and left.
-#'
+#' 
+#' @export
+#' 
 FeatFWHM <- function(y, x = seq_along(y), n = 30*length(x), method = "walk", basal = min(y)){
   if(!method %in% c("walk", "minimum")) stop("Method must be one of c('walk','minimum')")
   # Shift the data to have basal at 0, this is important so that maximum peak is
