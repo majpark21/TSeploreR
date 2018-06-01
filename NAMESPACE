@@ -3,6 +3,7 @@
 export(FeatAllFeat)
 export(FeatDiffMinMax)
 export(FeatExpDec)
+export(FeatFWHM)
 export(FeatHalfMaxDec)
 export(FeatHalfMaxGrow)
 export(FeatLagGrow)
