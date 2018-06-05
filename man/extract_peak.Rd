@@ -75,39 +75,47 @@ method.}
 
 \item{ext.what}{One of "mini" or "maxi". For "extrema" method.}
 
-\item{recenter}{numeric or NULL. If numeric, attempt to reposition peak position to a more precise
-location. Specifically, starting from peak estimated position, look for maximum in a window centered
-around it. The length of the window corresponds to the parameter value. Highly recommended for "spike"
-and "bump" method which tend to give an imprecise estimation of peak position.}
+\item{recenter}{numeric or NULL. If numeric, attempt to reposition peak
+position to a more precise location. Specifically, starting from peak
+estimated position, look for maximum in a window centered around it. The
+length of the window corresponds to the parameter value. Highly recommended
+for "spike" and "bump" method which tend to give an imprecise estimation of
+peak position.}
 
-\item{filter.thresh}{numeric or NULL. If numeric, attempt at filtering peaks on the base of a 
-minimal amplitude. To do so, TS are detrended by subtracting a rolling mean and
-amplitude to baseline is computed. Peak is kept if this amplitude is above the "filter" value.
-If NULL, no filter is applied. It is highly recommended to recenter the peaks if this option is used.}
+\item{filter.thresh}{numeric or NULL. If numeric, attempt at filtering peaks
+on the base of a minimal amplitude. To do so, TS are detrended by
+subtracting a rolling mean and amplitude to baseline is computed. Peak is
+kept if this amplitude is above the "filter" value. If NULL, no filter is
+applied. It is highly recommended to recenter the peaks if this option is
+used.}
 
-\item{filter.winlen}{size of the window for moving average used to detrend prior to filtering. It is
-highly recommended to check the detrended signal (part of the output if filter is specified): in the
-detrended signal, area between peaks should oscillate around 0. If not, try to adjust the value.}
+\item{filter.winlen}{size of the window for moving average used to detrend
+prior to filtering. It is highly recommended to check the detrended signal
+(part of the output if filter is specified): in the detrended signal, area
+between peaks should oscillate around 0. If not, try to adjust the value.}
 
-\item{detect.early}{numeric or NULL. If numeric, extrapolate the time series by the corresponding
-number of points at its start. This aims at improving peak detection at the beginning of the series.
-Extrapolation is performed by ARIMA model (see ?forecast::auto.arima)}
+\item{detect.early}{numeric or NULL. If numeric, extrapolate the time series
+by the corresponding number of points at its start. This aims at improving
+peak detection at the beginning of the series. Extrapolation is performed
+by ARIMA model (see ?forecast::auto.arima)}
 
-\item{show.warning}{Logical, disable warning for the current execution. Useful when providing
-all.winlen and applying the function multiple times.}
+\item{show.warning}{Logical, disable warning for the current execution.
+Useful when providing all.winlen and applying the function multiple times.}
 }
 \value{
 A data table containing the signal along with results all of selected
-  methods. Each method result is stored in a different column. If filter is specified,
-  also returns the detrended signal.
+  methods. Each method result is stored in a different column. If filter is
+  specified, also returns the detrended signal.
 }
 \description{
-A wrapper for different peak extraction methods. In addition, has some options
-to detect peak position to give a more precise estimate of peak position.
+A wrapper for different peak extraction methods. In addition, has some
+options to detect peak position to give a more precise estimate of peak
+position.
 }
 \details{
 Zscore method is based on
   https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data#22640362.
+
 
 
   Spike and Bump methods are wrapper for the function of the peakPick
@@ -119,7 +127,6 @@ Zscore method is based on
   https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.find_peaks_cwt.html.
 }
 \examples{
- 
 # Curve coming from real-data:
 y <- c(1.114, 1.146, 1.106, 1.049, 1.031, 1.01, 1, 0.992, 0.987, 0.981, 1.009, 1.072, 1.053, 1.018, 0.988,
  0.979, 0.965, 0.958, 0.956, 0.942, 0.939, 0.932, 0.926, 0.922, 0.919, 0.919, 0.916, 0.915, 0.918, 0.916,
@@ -133,13 +140,13 @@ y <- c(1.114, 1.146, 1.106, 1.049, 1.031, 1.01, 1, 0.992, 0.987, 0.981, 1.009, 1
  0.977, 0.979, 0.977, 0.981, 0.982, 0.976, 0.971, 0.97, 0.965, 0.966, 0.967, 0.967, 0.972, 0.904, 0.966,
  0.978, 0.983, 0.979, 0.975, 0.98, 0.973, 0.968, 0.97, 0.962, 0.966, 0.962, 0.968, 0.964, 0.956, 0.963,
  0.954, 0.958, 0.956, 0.958, 0.952, 0.95, 0.952, 0.946, 0.953, 0.952, 0.952, 0.953, 0.952, 0.954, 0.956)
- 
+
 # Extract peaks with "vanilla" bump method. First smooth signal with a moving average of width 5, peaks must be
 # separated with a minimal distance of 2 points.
 peaks_vanilla <- extract_peak(y, method = "bump", bp.winlen = 5, bp.mind = 1, recenter = NULL, filter.thresh = NULL)
 # Add: Recenter peaks to the maximum in a neigbourhood of 2 points.
 peaks_center <- extract_peak(y, method = "bump", bp.winlen = 5, bp.mind = 1, recenter = 2, filter.thresh = NULL)
-# Add: detrend the signal with a moving average of width 4, and filter peaks which amplitude is below 0.05 in the detrended signal. 
+# Add: detrend the signal with a moving average of width 4, and filter peaks which amplitude is below 0.05 in the detrended signal.
 peaks_center_filter <- extract_peak(y, method = "bump", bp.winlen = 5, bp.mind = 1, recenter = 2, filter.thresh = 0.05, filter.winlen = 10)
 # Add: detection of early peak by extrapolating 10 points
 peaks_final <- extract_peak(y, method = "bump", bp.winlen = 5, bp.mind = 1, recenter = 2, filter.thresh = 0.05, filter.winlen = 10, detect.early = 10)
@@ -159,4 +166,7 @@ abline(v=which(peaks_final$bump), col = "red", lty = "dashed")
 y_extend <- rev(c(rev(y), forecast(auto.arima(rev(y)), h = 10)$mean))
 plot(y_extend, main = "Extended Series for early peak detection.\\nBlue dots are predicted by ARIMA.", type = "b")
 points(1:10, y_extend[1:10], pch=20, col="blue")
+}
+\seealso{
+isolate_peak
 }
