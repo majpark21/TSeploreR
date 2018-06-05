@@ -483,6 +483,10 @@ isolate_peak <- function(y, positions, thresh.order1=0, use.second = FALSE, thre
   else if(out.type == "vector" | out.type == "data.table"){
     # 0: no peak, X: belong to peak X
     vout <- rep(0, length(y))
+    # Avoid bug if provided list of peak was empty
+    if(length(positions)==0){
+      return(vout)
+    }
     starts <- unlist(isolated_peaks)[names(unlist(isolated_peaks)) == "start"]
     ends <- unlist(isolated_peaks)[names(unlist(isolated_peaks)) == "end"]
     # if one of the borders are missing, don't consider and skip i
