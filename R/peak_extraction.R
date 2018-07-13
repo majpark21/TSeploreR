@@ -450,8 +450,8 @@ isolate_peak <- function(y, positions, thresh.order1=0, use.second = FALSE, thre
     for(i in seq(pos, 1, -1)){
       # If peak is close to start of TS break or get error 
       if(is.na(d1[i])) break
-      # Less or equal order 1 because reverse time
-      if(d1[i] <= thresh.order1){
+      # Minus d1 because reverse time
+      if(-(d1[i]) >= thresh.order1){
         #print("stop left d1")
         #print(pos)
         left <- i
