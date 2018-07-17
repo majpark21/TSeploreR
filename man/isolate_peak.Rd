@@ -4,19 +4,24 @@
 \alias{isolate_peak}
 \title{Isolate peaks}
 \usage{
-isolate_peak(y, positions, thresh.order1 = 0, use.second = FALSE,
-  thresh.order22 = NULL, thresh.order12 = NULL, out.type = "data.table")
+isolate_peak(y, positions, thresh.order1 = 0, include.boundary = TRUE,
+  use.second = FALSE, thresh.order22 = NULL, thresh.order12 = NULL,
+  out.type = "data.table")
 }
 \arguments{
 \item{y}{A numeric vector, from which to isolate peaks.}
 
-\item{positions}{A logical of same length as y. Indicate the positions of the
-tip of the peaks. Can be obtained by running TSexploreR::extract_peak()}
+\item{positions}{A vector of integers indicating the index of the tip of the
+peaks.}
 
 \item{thresh.order1}{Threshold for 1st derivative. Whenever the walk
 encounters a 1st derivative that is bigger than the threshold, stop and
 define a peak border. Default to 0, i.e. whenever the signal increases
 again, stop and define a border.}
+
+\item{include.boundary}{logical. If TRUE, will use beginning/end of the series
+as valid peak border . If FALSE, when a walk from a peak reaches beginning or
+end of the series, the peak isolation will be considered as failed.}
 
 \item{use.second}{logical, use 2nd derivative?}
 
