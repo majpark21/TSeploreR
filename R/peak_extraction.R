@@ -351,12 +351,15 @@ extract_peak <-
 #' to stop whenever the signal is steady (low 2nd derivative) and evolving slowly
 #' (low 1st derivative).
 #' @param y A numeric vector, from which to isolate peaks.
-#' @param positions A logical of same length as y. Indicate the positions of the
-#'   tip of the peaks. Can be obtained by running TSexploreR::extract_peak()
+#' @param positions A vector of integers indicating the index of the tip of the
+#' peaks.
 #' @param thresh.order1 Threshold for 1st derivative. Whenever the walk
 #'   encounters a 1st derivative that is bigger than the threshold, stop and
 #'   define a peak border. Default to 0, i.e. whenever the signal increases
 #'   again, stop and define a border.
+#' @param include.boundary logical. If TRUE, will use beginning/end of the series
+#' as valid peak border . If FALSE, when a walk from a peak reaches beginning or
+#' end of the series, the peak isolation will be considered as failed.
 #' @param use.second logical, use 2nd derivative?
 #' @param thresh.order22 If use.second = TRUE. If absolute second derivative is
 #'   below this threshold, consider the signal as steady. If thresh.order12 is
@@ -411,7 +414,7 @@ extract_peak <-
 #'    }
 #'  }
 #'
-isolate_peak <- function(y, positions, thresh.order1=0, use.second = FALSE, thresh.order22=NULL, thresh.order12=NULL, out.type="data.table"){
+isolate_peak <- function(y, positions, thresh.order1=0, include.boundary = TRUE, use.second = FALSE, thresh.order22=NULL, thresh.order12=NULL, out.type="data.table"){
   # First and second derivatives, padded with NAs
   # Derivatives according to index, not time!
   d1 <- c(NA, diff(y, differences = 1))
@@ -443,12 +446,19 @@ isolate_peak <- function(y, positions, thresh.order1=0, use.second = FALSE, thre
           break
         }
       }
+      if(include.boundary & i == length(y)){
+        right <- length(y)
+      }
     }
     
     # Left walk: same stopping criteria as right walk
     left <- NA
     for(i in seq(pos, 1, -1)){
-      # If peak is close to start of TS break or get error 
+      # If peak is close to start of TS break or get error
+      if(include.boundary & i == 1){
+        left <- 1
+        break
+      }
       if(is.na(d1[i])) break
       # Minus d1 because reverse time
       if(-(d1[i]) >= thresh.order1){
