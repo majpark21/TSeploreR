@@ -4,11 +4,14 @@
 #' https://stats.stackexchange.com/a/78855/43610
 #' @param Vector.1,Vector.2  numerical vectors
 #'
-#' @return A vector of 5 measures: \itemize{ \item "jm": Jeffries-Matusita index.
-#'   Bounded version of Bhattacharrya on (0,2). 0: identical dsitributions; 2:
-#'   perfectly separable distributions. \item "bh": Bhattacharrya index Vary on
-#'   (0, +inf). 0: identical distributions. \item "div": Kullback-Leibler
-#'   Divergence. \item "tdiv": Transformed Divergence }
+#' @return A vector of 5 measures: 
+#'   "jm": Jeffries-Matusita index. Bounded version of Bhattacharrya on (0,2). 0: identical dsitributions; 2: perfectly separable distributions;
+#'   
+#'   "bh": Bhattacharrya index Vary on (0, +inf). 0: identical distributions;
+#'   
+#'   "div": Kullback-Leibler Divergence;
+#'   
+#'   "tdiv": Transformed Divergence
 #' @export
 #'
 separability.measures <- function ( Vector.1 , Vector.2 ) {

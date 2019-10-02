@@ -11,13 +11,15 @@ FeatDiffMinMax(y)
 }
 \value{
 List of 5:
-\itemize{
-  \item min: minimum of y
-  \item max: maximum of y
-  \item diff.min.max: $max - $min
-  \item time.min: first index at which $min is reached in y
-  \item time.max: first index at which $max is reached in y
-}
+  "min": minimum of y
+  
+  "max": maximum of y
+  
+  "diff.min.max": $max - $min
+  
+  "time.min": first index at which $min is reached in y
+  
+  "time.max": first index at which $max is reached in y
 }
 \description{
 Difference between minimum and maximum value.

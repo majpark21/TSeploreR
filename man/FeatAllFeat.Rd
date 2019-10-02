@@ -20,26 +20,26 @@ argument 'end'.}
 \item{...}{Additional arguments for FeatFWHM.}
 }
 \value{
-A list of 13 features: \itemize{ \item mini: minimum of y \item maxi:
-  maximum of y \item diff.min.max: difference maxi-mini \item time.min: index
-  of y where it is minimized \item time.max: index of y where it is maximized
-  \item max.amp: amplitude of peak. Obtained by subtracting constant basal.
-  See FeatMaxAmplitude. \item FWHM: Full-Width at Half maximum. Difference
-  right-left. See FeatFWHM. \item left: time where half maximum of the peak
-  is reached on its left flank. \item right: time where half maximum of the
-  peak is reached on its right flank. \item grow.half,grow.lag: growth rate
+A list of 13 features: "mini": minimum of y; "maxi":
+  maximum of y; "diff.min.max": difference maxi-mini; "time.min": index
+  of y where it is minimized; "time.max": index of y where it is maximized;
+  "max.amp": amplitude of peak. Obtained by subtracting constant basal.
+  See FeatMaxAmplitude. "FWHM": Full-Width at Half maximum. Difference
+  right-left. See FeatFWHM. "left": time where half maximum of the peak
+  is reached on its left flank; "right": time where half maximum of the
+  peak is reached on its right flank; "grow.half","grow.lag": growth rate
   estimated by the slope of a linear regression of the ascending phase of the
   peak. 2 different methods are used to isolate this phase. First, it is
   defined as the time between which the signal has reached half of its
   maximum (left) and its maximum; see FeatHalfMaxGrow. Second, as the time
   between a hard-encoded starting time point (start.lag.grow) and peak
-  maximum; see FeatLagGrow. \item dec.half,dec.exp: decay rate estimated by
+  maximum; see FeatLagGrow. "dec.half","dec.exp": decay rate estimated by
   the slope of a linear regression of the descending phase of the peak. 2
   different methods are used to isolate this phase. First, it is defined as
   the time between which the signal has reached its maximum and half of its
   maximum (right); see FeatHalfMaxDec. Second, as the time between peak
   maximum and a hard-encoded endtime point (start.lag.grow); see FeatExpDec.
-  In this case the signal is modelled by EXPONENTIAL DECAY. }
+  In this case the signal is modelled by EXPONENTIAL DECAY.
 }
 \description{
 Extract all single-peak features

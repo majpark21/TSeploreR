@@ -13,8 +13,8 @@ FeatMaxAmplitude(y, basal = min(y))
 peak as amplitude instead of absolute value}
 }
 \value{
-list of 2: \itemize{ \item max: maximum value of y after subtracting
-  basal from it. \item time.max: index at which $max is reached. }
+list of 2: "max": maximum value of y after subtracting
+  basal from it; "time.max": index at which $max is reached.
 }
 \description{
 Subtracts a constant value to a vector and return the maximum value of the

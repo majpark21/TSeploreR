@@ -24,13 +24,11 @@ be performed in a robust way. Default to TRUE.}
 }
 \value{
 A list of 4:
-\itemize{
-  \item $pearson: Pearson's correlation coefficient
-  \item $spearman: Spearman's rank-based correlation coefficient
-  \item $kendall: Kendall's rank-based correlation coefficient
-  \item $overlap.clip: Overlap of clipped trajectories. Clipping
+  $pearson: Pearson's correlation coefficient
+  $spearman: Spearman's rank-based correlation coefficient
+  $kendall: Kendall's rank-based correlation coefficient
+  $overlap.clip: Overlap of clipped trajectories. Clipping
   performed according to method.clip.
-}
 }
 \description{
 A set of measures for synchrony of (oscillating) trajectories.
