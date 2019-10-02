@@ -5,7 +5,8 @@
 \title{noise_ydiff}
 \usage{
 noise_ydiff(x, summary.fun = c("mean", "median", "sd"), power.diff = 1,
-  hcl.distance = "euclidean", hcl.linkage = "complete", plot.diff = T)
+  hcl.distance = "euclidean", hcl.linkage = "complete",
+  plot.diff = T)
 }
 \arguments{
 \item{x}{A numerical matrix. Individuals in rows, measurements in columns.}

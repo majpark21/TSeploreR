@@ -19,4 +19,4 @@ Imports: data.table,
     heatmap3,
     mblm,
     zoo
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

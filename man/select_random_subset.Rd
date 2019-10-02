@@ -4,8 +4,8 @@
 \alias{select_random_subset}
 \title{Select Random}
 \usage{
-select_random_subset(in.file, ntraj, col.uniqID, col.time, min.obs = NULL,
-  col.whatokeep = NULL, out.file = NULL)
+select_random_subset(in.file, ntraj, col.uniqID, col.time,
+  min.obs = NULL, col.whatokeep = NULL, out.file = NULL)
 }
 \arguments{
 \item{in.file}{A character or a variable for the current environment. If a

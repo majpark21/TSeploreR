@@ -13,7 +13,7 @@ PCA.DB(pca, PC = NULL, PCvar = NULL, labels.pca, label.cluster)
 few components to use only leading trends in data.}
 
 \item{PCvar}{If provided, replace PC. Instead of using a given set of PC,
-will use as many as necessary to reach PCvar% of explained variance.}
+will use as many as necessary to reach PCvar percentage of explained variance.}
 
 \item{labels.pca}{A data.table or character matrix with a number of rows
 equal to the number of time series used in pca. Each column contains a

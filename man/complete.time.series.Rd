@@ -4,8 +4,8 @@
 \alias{complete.time.series}
 \title{complete.time.series}
 \usage{
-complete.time.series(data, cond.col, lab.col, time.col, time.vector, meas.col,
-  impute = FALSE)
+complete.time.series(data, cond.col, lab.col, time.col, time.vector,
+  meas.col, impute = FALSE)
 }
 \arguments{
 \item{data}{a data.table in long format with at least 4 columns:

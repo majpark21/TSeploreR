@@ -260,7 +260,7 @@ visualize.extremes.PCA <- function(pca.object, matrix.data, PC, n, tails = "both
 #' @param PC Which PCs should be used to compute the DB index. Consider only a
 #'   few components to use only leading trends in data.
 #' @param PCvar If provided, replace PC. Instead of using a given set of PC,
-#' will use as many as necessary to reach PCvar% of explained variance.
+#' will use as many as necessary to reach PCvar percentage of explained variance.
 #' @param labels.pca A data.table or character matrix with a number of rows
 #'   equal to the number of time series used in pca. Each column contains a
 #'   different label for the associated trajectory. Note that column names must

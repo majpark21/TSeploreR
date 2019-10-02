@@ -13,7 +13,8 @@ sim_phase_shifted(n, noise, freq = 0.2, end = 50)
 
 sim_phase_shifted_damped(n, noise, damp_params, freq = 0.2, end = 50)
 
-sim_phase_shifted_with_fixed_trend(n, noise, slope, freq = 0.2, end = 50)
+sim_phase_shifted_with_fixed_trend(n, noise, slope, freq = 0.2,
+  end = 50)
 
 sim_noisy_amplitude(n, noise, freq = 0.2, end = 50)
 
