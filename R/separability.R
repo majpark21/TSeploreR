@@ -11,7 +11,7 @@
 #'   
 #'   "div": Kullback-Leibler Divergence;
 #'   
-#'   "tdiv": Transformed Divergence }
+#'   "tdiv": Transformed Divergence
 #' @export
 #'
 separability.measures <- function ( Vector.1 , Vector.2 ) {

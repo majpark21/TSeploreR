@@ -23,19 +23,21 @@
 #' features should be performed robustly. See ?classical.decomposition.
 #'
 #' @return Alist of 5 features of x:
-#' \itemize{
-#'   \item $trend.extrema: slope of linear regression performed on
+#'   $trend.extrema: slope of linear regression performed on
 #'   local extrema. Estimator for long-term trend.
-#'   \item $trend.rollmean: slope of linear regression performed on
+#'   
+#'   $trend.rollmean: slope of linear regression performed on
 #'   rolling mean. Estimator for long-term trend.
-#'   \item $amplt.dist.euclid: Euc lidean distance between x and
+#'   
+#'   $amplt.dist.euclid: Euc lidean distance between x and
 #'   its rolling mean. Not scaled! Estimator for oscillation amplitude.
-#'   \item $amplt.season: amplitude (max-min) of the seasonal
+#'   
+#'   $amplt.season: amplitude (max-min) of the seasonal
 #'   component. Estimator for oscillation amplitude.
-#'   \item $amplt.variation: mean remainder of classical decomposition,
+#'   
+#'   $amplt.variation: mean remainder of classical decomposition,
 #'   after optionally trimming of small remainders.
 #'   Estimator for oscillation amplitude variation.
-#' }
 #' @export
 #'
 #' @examples
@@ -94,12 +96,13 @@ MPFeatAllFeat <- function(x, window.rollmean, window.extrema,
 #' Median-Based Linear Models are used, see ?mblm::mblm
 #'
 #' @return A list of 4.
-#' \itemize{
-#'  \item $trend, slope of the linear model
-#'  \item $model, the full linear model
-#'  \item $extremes, x extrema values and their index
-#'  \item $type, type of extrema, "mini" or "maxi"
-#'  }
+#'  $trend, slope of the linear model
+#'  
+#'  $model, the full linear model
+#'  
+#'  $extremes, x extrema values and their index
+#'  
+#'  $type, type of extrema, "mini" or "maxi"
 #' @export
 #' @seealso MPFeatTrend_rollmean
 #'
