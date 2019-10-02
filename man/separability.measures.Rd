@@ -10,11 +10,14 @@ separability.measures(Vector.1, Vector.2)
 \item{Vector.1, Vector.2}{numerical vectors}
 }
 \value{
-A vector of 5 measures: \itemize{ \item "jm": Jeffries-Matusita index.
-  Bounded version of Bhattacharrya on (0,2). 0: identical dsitributions; 2:
-  perfectly separable distributions. \item "bh": Bhattacharrya index Vary on
-  (0, +inf). 0: identical distributions. \item "div": Kullback-Leibler
-  Divergence. \item "tdiv": Transformed Divergence }
+A vector of 5 measures: 
+  "jm": Jeffries-Matusita index. Bounded version of Bhattacharrya on (0,2). 0: identical dsitributions; 2: perfectly separable distributions;
+  
+  "bh": Bhattacharrya index Vary on (0, +inf). 0: identical distributions;
+  
+  "div": Kullback-Leibler Divergence;
+  
+  "tdiv": Transformed Divergence
 }
 \description{
 Compute a set of measures for separability of 2 distributions. from:

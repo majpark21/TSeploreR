@@ -32,19 +32,21 @@ features should be performed robustly. See ?classical.decomposition.}
 }
 \value{
 Alist of 5 features of x:
-\itemize{
-  \item $trend.extrema: slope of linear regression performed on
+  $trend.extrema: slope of linear regression performed on
   local extrema. Estimator for long-term trend.
-  \item $trend.rollmean: slope of linear regression performed on
+  
+  $trend.rollmean: slope of linear regression performed on
   rolling mean. Estimator for long-term trend.
-  \item $amplt.dist.euclid: Euc lidean distance between x and
+  
+  $amplt.dist.euclid: Euc lidean distance between x and
   its rolling mean. Not scaled! Estimator for oscillation amplitude.
-  \item $amplt.season: amplitude (max-min) of the seasonal
+  
+  $amplt.season: amplitude (max-min) of the seasonal
   component. Estimator for oscillation amplitude.
-  \item $amplt.variation: mean remainder of classical decomposition,
+  
+  $amplt.variation: mean remainder of classical decomposition,
   after optionally trimming of small remainders.
   Estimator for oscillation amplitude variation.
-}
 }
 \description{
 Compute a set of features aimed at characterizing multipeak/oscillating

@@ -6,11 +6,11 @@
 \usage{
 report.PCA(data, what = c("cast.and.pca", "plot.pca", "plot.variance",
   "plot.extremes", "plot.loading", "DBindex"), measure.var = NULL,
-  condition.var = NULL, time.var = NULL, center.pca = T, scale.pca = F,
-  PC.db = c(1, 2), var.db = NULL, PC.biplot = c(1, 2), PC.extremes = 1,
-  PC.loading = PC.biplot, log.loading = F, na.fill = NULL,
-  label.color.pca = NULL, group.db = label.color.pca, n.extremes = NULL,
-  ...)
+  condition.var = NULL, time.var = NULL, center.pca = T,
+  scale.pca = F, PC.db = c(1, 2), var.db = NULL, PC.biplot = c(1,
+  2), PC.extremes = 1, PC.loading = PC.biplot, log.loading = F,
+  na.fill = NULL, label.color.pca = NULL, group.db = label.color.pca,
+  n.extremes = NULL, ...)
 }
 \arguments{
 \item{data}{A data table which contains time series in long format or a
